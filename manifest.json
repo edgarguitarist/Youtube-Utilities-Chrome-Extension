@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Utilities",
   "description": "Agrega utilidades y funcionalidades que YouTube debería tener",
-  "version": "1.0",
+  "version": "2.0",
   "icons": {
     "128": "images/128.png",
     "256": "images/256.png",
@@ -11,7 +11,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["*://*.youtube.com/*"],
+  "host_permissions": ["*.youtube.com/*"],
   "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html"
