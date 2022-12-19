@@ -15,7 +15,7 @@ Usar el modo desarrollador de Chrome para instalar la extensión como desempaque
 
 ### Futuras funcionalidades
 
-- [x] Botón de Me Gusta directamente en el reproductor de YouTube en pantalla completa.
+- [ ] Animación o indicación de que el boton Me Gusta y el No me gusta en el reproductor de YouTube se ha clickeado.
 
 ## Licencia
 
