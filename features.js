@@ -69,7 +69,7 @@ window.onload = () => {
       newButton.classList.remove("ytp-fullscreen-button");
       newButton.setAttribute(
         "title",
-        `${name[0].toUpperCase() + name.slice(1)}}`
+        `${name[0].toUpperCase() + name.slice(1)}`
       );
       newButton.setAttribute("aria-label", name);
       newButton.setAttribute("data-title-no-tooltip", name);
