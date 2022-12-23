@@ -10,7 +10,7 @@ Usar el modo desarrollador de Chrome para instalar la extensión como desempaque
 
 - `A` - Da Me Gusta al video.
 - `D` - Da No Me Gusta al video.
-- `S` - Muestra el modal de compartir.
+- `S` - Te Subscribes al Canal.
 - `X` - Agrega botón like y dislike en el reproductor.
 
 ### Futuras funcionalidades

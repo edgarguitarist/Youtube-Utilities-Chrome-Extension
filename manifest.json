@@ -11,7 +11,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["*.youtube.com/*"],
+  
   "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html"

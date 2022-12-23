@@ -23,6 +23,14 @@ window.onload = () => {
       "ytd-button-renderer > yt-button-shape > button"
     );
 
+    const [subscribe, unsubscribe] = document
+      .querySelectorAll("ytd-subscribe-button-renderer")[0]
+      .querySelectorAll("yt-button-shape");
+
+    const buttonSubscribe = subscribe.hidden
+      ? document.querySelector("#confirm-button > yt-button-shape > button")
+      : subscribe.querySelector("button");
+
     function checkNoFocus() {
       return (
         document.activeElement.tagName !== "INPUT" &&
@@ -59,7 +67,10 @@ window.onload = () => {
       newButton.style =
         "width: 24px; position: relative; top: -12px; margin-right: 20px;";
       newButton.classList.remove("ytp-fullscreen-button");
-      newButton.setAttribute("title", `${name[0].toUpperCase()+name.slice(1)}}`);
+      newButton.setAttribute(
+        "title",
+        `${name[0].toUpperCase() + name.slice(1)}}`
+      );
       newButton.setAttribute("aria-label", name);
       newButton.setAttribute("data-title-no-tooltip", name);
       newButton.setAttribute("aria-keyshortcuts", name[0]);
@@ -77,7 +88,7 @@ window.onload = () => {
     const methods = {
       a: buttonLike,
       d: buttonDisLike,
-      s: buttonShare,
+      s: buttonSubscribe,
       x: 1,
       like: buttonLike,
       dislike: buttonDisLike,
