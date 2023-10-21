@@ -7,11 +7,12 @@ Usar el modo desarrollador de Chrome para instalar la extensión como desempaque
 ## Funcionalidades
 
 ### Teclas
-
+(Toggleable)
 - `A` - Da Me Gusta al video.
 - `D` - Da No Me Gusta al video.
 - `S` - Te Subscribes al Canal.
 - `X` - Agrega botón like y dislike en el reproductor.
+- `N` - Salta los anuncios cada 5 segundos.
 
 ### Futuras funcionalidades
 
