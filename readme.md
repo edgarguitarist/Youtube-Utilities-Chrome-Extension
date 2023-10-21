@@ -4,6 +4,9 @@
 
 Usar el modo desarrollador de Chrome para instalar la extensión como desempaquetada.
 
+![image](https://github.com/edgarguitarist/Youtube-Utilities-Chrome-Extension/assets/47311955/194432b6-f5ae-4bca-a3e6-8cc662ff3f27)
+
+
 ## Funcionalidades
 
 ### Teclas
