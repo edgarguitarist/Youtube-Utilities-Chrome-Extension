@@ -9,6 +9,8 @@ function setLocalStorage(data) {
 window.onload = () => {
   const data = getLocalStorage() || {
     newButton: false, //consider to add more data options here
+    OAChecker: false,
+    DarkMode: false,
   };
 
   if (data.newButton) {
@@ -102,24 +104,6 @@ window.onload = () => {
       }
     }, 5000);
     setLocalStorage(data);
-  }
-
-  function OA_v2() {
-    const targetNode = document.querySelector('.video-ads.ytp-ad-module');
-
-    // Función que se ejecutará cuando el div se actualice
-    function handleAdsUpdate(mutationsList, observer) {
-      hacerClicEnBotonOA();
-    }
-
-    // Crea un nuevo MutationObserver y pasa la función handleAdsUpdate como callback
-    const observer = new MutationObserver(handleAdsUpdate);
-
-    // Configura las opciones del MutationObserver para observar cambios en el contenido del nodo y los atributos del nodo
-    const config = { childList: true, subtree: true };
-
-    // Inicia la observación del nodo de destino con las opciones de configuración
-    observer.observe(targetNode, config);
   }
 
   function actions(method) {
