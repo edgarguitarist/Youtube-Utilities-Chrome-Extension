@@ -1,37 +1,56 @@
-function getLocalStorage() {
-    return JSON.parse(localStorage.getItem("yt-shortcuts"));
+function getLocalStorage(callback) {
+    chrome.storage.local.get(['yt-shortcuts'], function(result) {
+        const data = result['yt-shortcuts'] || {
+            newButton: false, 
+            OAChecker: false,
+            DarkMode: false,
+        };
+        callback(data);
+    });
 }
 
-function setLocalStorage(data) {
-    localStorage.setItem("yt-shortcuts", JSON.stringify(data));
+function setLocalStorage(data, callback) {
+    chrome.storage.local.set({'yt-shortcuts': data}, function() {
+        console.log('Datos guardados en chrome.storage.local');
+        if (callback) {
+            callback();
+        }
+    });
 }
 
-
-const data = getLocalStorage() || {
-    newButton: false, 
-    OAChecker: false,
-    DarkMode: false,
-};
-
-
-function getDarkMode() {
-    return data.DarkMode;
+function getDarkMode(callback) {
+    getLocalStorage(function(data) {
+        callback(data.DarkMode);
+    });
 }
 
-function setDarkMode() {
-    data.DarkMode = !data.DarkMode;
-    setLocalStorage(data);
+function setDarkMode(callback) {
+    getLocalStorage(function(data) {
+        data.DarkMode = !data.DarkMode;
+        setLocalStorage(data, function() {
+            if (callback) {
+                callback(data.DarkMode);
+            }
+        });
+    });
 }
+
 const body = document.getElementsByTagName('body')[0];
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 
-if(getDarkMode()) {
-    darkModeToggle.checked = true;
+//si existe darkModeToggle, entonces estamos en la página de opciones
+if (darkModeToggle !== null) {
+    darkModeToggle.addEventListener('change', function() {
+        setDarkMode(function(isDarkMode) {
+            darkModeToggle.checked = isDarkMode;
+        });
+    });
+    
+    body.onload = function() {
+        console.log('load');
+        getDarkMode(function(isDarkMode) {
+            darkModeToggle.checked = isDarkMode;
+        });
+    };    
 }
 
-body.onload = () => {
-    console.log('load');
-    darkModeToggle.addEventListener('change', () => {
-        setDarkMode()
-    });
-}

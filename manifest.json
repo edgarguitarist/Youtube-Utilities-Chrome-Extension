@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Utilities",
   "description": "Agrega utilidades y funcionalidades que YouTube debería tener",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "icons": {
     "128": "images/128.png",
     "256": "images/256.png",
@@ -12,7 +12,7 @@
     "service_worker": "background.js"
   },
   
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "action": {
     "default_popup": "popup.html"
   },
@@ -24,7 +24,7 @@
         "*://m.youtube.com/watch*"
       ],
       "exclude_matches": ["*://*.music.youtube.com/*"],
-      "js": ["features.js"]
+      "js": ["features.js", "load.js"]
     }
   ],
   "externally_connectable": {
