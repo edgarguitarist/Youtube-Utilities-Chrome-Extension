@@ -16,6 +16,20 @@ window.onload = () => {
       OA();
     }
 
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if (namespace === 'local' && changes['yt-shortcuts']) {
+        const newValues = changes['yt-shortcuts'].newValue;
+        if (newValues.newButton !== data.newButton) {
+          data.newButton = !newValues.newButton;
+          toggleNewButtons();
+        }
+        if (newValues.OAChecker !== data.OAChecker) {
+          data.OAChecker = !newValues.OAChecker;
+          OA();
+        }
+      }
+    });
+
     function checkNoFocus() {
       return (
         document.activeElement.tagName !== "INPUT" &&
