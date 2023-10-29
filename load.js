@@ -4,6 +4,7 @@ function getLocalStorage(callback) {
             newButton: false,
             OAChecker: false,
             DarkMode: false,
+            Lang: 'en'
         };
         callback(data);
     });
@@ -11,44 +12,56 @@ function getLocalStorage(callback) {
 
 function setLocalStorage(data, callback) {
     chrome.storage.local.set({ 'yt-shortcuts': data }, function () {
-        console.log('Datos guardados en chrome.storage.local');
         if (callback) {
             callback();
         }
     });
 }
 
-function getDarkMode(callback) {
+function getValue(key, callback) {
     getLocalStorage(function (data) {
-        callback(data.DarkMode);
+        callback(data[key]);
     });
 }
 
-function setDarkMode(isDarkMode, callback) {
+function setValue(key, value, callback) {
     getLocalStorage(function (data) {
-        data.DarkMode = isDarkMode;
+        data[key] = value;
         setLocalStorage(data, function () {
             if (callback) {
-                callback(data.DarkMode);
+                callback(data[key]);
             }
         });
     });
 }
 
+
+
 const body = document.getElementsByTagName('body')[0];
 const darkModeToggle = document.getElementById('dark-mode-toggle');
-
+const langToggle = document.getElementById('lang-toggle');
 if (darkModeToggle !== null) {
     darkModeToggle.addEventListener('change', function () {
-        setDarkMode(darkModeToggle.checked, function (isDarkMode) {
-            darkModeToggle.checked = isDarkMode;
-        });
+        setValue('DarkMode',darkModeToggle.checked, function (value) {
+            darkModeToggle.checked = value;
+        });        
+    });
+
+    langToggle.addEventListener('change', function () {
+        setValue('Lang',langToggle.checked, function (value) {
+            langToggle.checked = value;
+            handleLangToggle();
+        });        
     });
 
     body.onload = function () {
-        console.log('load');
-        getDarkMode(function (isDarkMode) {
-            darkModeToggle.checked = isDarkMode;
+        getValue('DarkMode',function (value) {
+            darkModeToggle.checked = value;
+        });
+
+        getValue('Lang',function (value) {
+            langToggle.checked = value;
+            handleLangToggle();
         });
     };
 
@@ -59,6 +72,55 @@ if (darkModeToggle !== null) {
             if (newValues.DarkMode !== undefined) {
                 darkModeToggle.checked = newValues.DarkMode;
             }
+            if (newValues.Lang !== undefined) {
+                langToggle.checked = newValues.Lang;
+                handleLangToggle();
+            }
         }
     });
+}
+
+
+const textos = {
+    es: {
+        title: 'YouTube Utilidades',
+        langToggleLabel: 'Ingles',
+        darkModeToggleLabel: 'Modo Oscuro',
+        actionsHeader: 'Acciones Disponibles 🔮✨',
+        likeAction: 'Presiona <strong>"A"</strong> para dar Me gusta a un video 👍🏽',
+        dislikeAction: 'Presiona <strong>"D"</strong> para dar No me gusta a un video 👎🏽',
+        subscribeAction: 'Presiona <strong>"S"</strong> para suscribirte a un canal 😍',
+        playerButtonsAction: 'Presiona <strong>"X"</strong> para añadir botones de Me gusta y No me gusta al reproductor de video 📺',
+        skipAdsAction: 'Presiona <strong>"N"</strong> para Omitir Anuncios Automáticamente ⛔',
+        developer: 'Desarrollado con ❤️ por <a href="https://github.com/edgarguitarist">edgarguitarist</a>'
+    },
+    en: {
+        title: 'YouTube Utilities',
+        langToggleLabel: 'Spanish',
+        darkModeToggleLabel: 'Dark Mode',
+        actionsHeader: 'Available Actions 🔮✨',
+        likeAction: 'Press <strong>"A"</strong> to Like a video 👍🏽',
+        dislikeAction: 'Press <strong>"D"</strong> to Dislike a video 👎🏽',
+        subscribeAction: 'Press <strong>"S"</strong> to Subscribe to a Channel 😍',
+        playerButtonsAction: 'Press <strong>"X"</strong> to Add Like & Dislike buttons to Video Player 📺',
+        skipAdsAction: 'Press <strong>"N"</strong> to Auto-Skip Ads ⛔',
+        developer: 'Developed with ❤️ by <a href="https://github.com/edgarguitarist">edgarguitarist</a>'
+    }
+};
+
+function handleLangToggle() {    
+    const lang = langToggle.checked ? 'es' : 'en';
+    const langTexts = textos[lang];
+    document.title = langTexts.title;
+    document.getElementById('title').innerHTML = langTexts.title;
+    document.getElementById('label-lang-toggle').title = langTexts.langToggleLabel;
+    document.getElementById('label-dark-mode-toggle').title = langTexts.darkModeToggleLabel;
+    document.getElementById('actions-header').innerHTML = langTexts.actionsHeader;
+    document.getElementById('like-action').innerHTML = langTexts.likeAction;
+    document.getElementById('dislike-action').innerHTML = langTexts.dislikeAction;
+    document.getElementById('subscribe-action').innerHTML = langTexts.subscribeAction;
+    document.getElementById('player-buttons-action').innerHTML = langTexts.playerButtonsAction;
+    document.getElementById('skip-ads-action').innerHTML = langTexts.skipAdsAction;
+    document.getElementById('developer').innerHTML = langTexts.developer;
+
 }

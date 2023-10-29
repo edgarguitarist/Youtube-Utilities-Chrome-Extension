@@ -4,6 +4,7 @@ window.onload = () => {
       newButton: false,
       OAChecker: false,
       DarkMode: false,
+      Lang: 'en'
     };
 
     if (data.newButton) {

@@ -8,6 +8,7 @@
     <style>
       :root {
         zoom: 150%;
+        color-scheme: dark;
       }
 
       :root:has(#dark-mode-toggle:checked) {
@@ -20,10 +21,11 @@
         place-content: center;
         height: 64vh;
       }
+
       li {
         list-style: none;
         text-align: center;
-        margin-left: -35px;
+        /* margin-left: -35px; */
       }
 
       a {
@@ -31,6 +33,7 @@
         text-decoration: none;
         margin-left: 5px;
       }
+
       a:hover {
         text-decoration: underline;
       }
@@ -40,6 +43,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 10px;
+        width: 70%;
       }
 
       h3 > img {
@@ -72,16 +77,35 @@
         justify-content: center;
         align-items: center;
       }
-      #label-dark-mode-toggle {
+
+      /* cambiar el contenido de la etiqueta label-dark-mode-toggle con el checkbox #dark-mode-toggle*/
+      #dark-mode-toggle:checked + #label-dark-mode-toggle::before {
+        content: "🌞";
+      }
+
+      #dark-mode-toggle + #label-dark-mode-toggle::before {
+        content: "🌚";
+      }
+
+      #dark-mode-toggle,
+      #lang-toggle {
+        display: none;
+      }
+
+      #label-dark-mode-toggle,
+      #label-lang-toggle {
+        font-size: 20px;
         cursor: pointer;
         font-weight: bold;
       }
-      /* cambiar el contenido de la etiqueta label-dark-mode-toggle con el checkbox #dark-mode-toggle*/
-      #dark-mode-toggle:checked + #label-dark-mode-toggle::before {
-        content: " Light Mode 🌞";
+
+      /* Cambiar el estilo del label cuando el checkbox está marcado */
+      #lang-toggle:checked + #label-lang-toggle::before {
+        content: "🇬🇧";
       }
-      #dark-mode-toggle + #label-dark-mode-toggle::before {
-        content: " Dark Mode 🌚";
+
+      #lang-toggle + #label-lang-toggle::before {
+        content: "🇪🇨";
       }
     </style>
     <script type="module" src="load.js"></script>
@@ -89,7 +113,17 @@
   <body>
     <div id="container">
       <div id="header">
-        <h3>Youtube Utilities <img src="/images/original.png" alt="" /></h3>
+        <h3>
+          <span id="title">YouTube Utilities</span>
+          <img src="/images/original.png" alt="" />
+        </h3>
+        <div id="inputContainer">
+          <input id="lang-toggle" type="checkbox" /><label
+            id="label-lang-toggle"
+            title=""
+            for="lang-toggle"
+          ></label>
+        </div>
         <div id="inputContainer">
           <input id="dark-mode-toggle" type="checkbox" /><label
             id="label-dark-mode-toggle"
@@ -98,26 +132,32 @@
         </div>
       </div>
       <div id="content">
-        <h4>Available Actions 🔮✨</h4>
+        <h4 id="actions-header">Available Actions 🔮✨</h4>
         <ul>
-          <li>Press <strong>"A"</strong> to Like a video 👍🏽</li>
-          <li>Press <strong>"D"</strong> to Dislike a video 👎🏽</li>
-          <li>Press <strong>"S"</strong> to Subscribe to a Channel 😍</li>
-          <li>
+          <li id="like-action">
+            Press <strong>"A"</strong> to Like a video 👍🏽
+          </li>
+          <li id="dislike-action">
+            Press <strong>"D"</strong> to Dislike a video 👎🏽
+          </li>
+          <li id="subscribe-action">
+            Press <strong>"S"</strong> to Subscribe to a Channel 😍
+          </li>
+          <li id="player-buttons-action">
             Press <strong>"X"</strong> to Add Like & Dislike buttons to Video
             Player 📺
           </li>
-          <li>
-            Press <strong>"N"</strong> to Create a interval timer to skip ads ⛔
+          <li id="skip-ads-action">
+            Press <strong>"N"</strong> to Auto-Skip Ads ⛔
           </li>
         </ul>
       </div>
     </div>
   </body>
   <footer>
-    <h3>
+    <h4 id="developer">
       Developed with ❤️ by
       <a href="https://github.com/edgarguitarist">edgarguitarist</a>
-    </h3>
+    </h4>
   </footer>
 </html>
