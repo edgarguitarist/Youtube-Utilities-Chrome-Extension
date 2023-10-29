@@ -22,6 +22,11 @@
         height: 64vh;
       }
 
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+
       li {
         list-style: none;
         text-align: center;
@@ -41,7 +46,7 @@
       h3 {
         margin: 0;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         gap: 10px;
         width: 70%;
@@ -72,7 +77,7 @@
         margin: 30px 0;
       }
 
-      #inputContainer {
+      .inputContainer {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -117,14 +122,14 @@
           <span id="title">YouTube Utilities</span>
           <img src="/images/original.png" alt="" />
         </h3>
-        <div id="inputContainer">
+        <div class="inputContainer">
           <input id="lang-toggle" type="checkbox" /><label
             id="label-lang-toggle"
             title=""
             for="lang-toggle"
           ></label>
         </div>
-        <div id="inputContainer">
+        <div class="inputContainer">
           <input id="dark-mode-toggle" type="checkbox" /><label
             id="label-dark-mode-toggle"
             for="dark-mode-toggle"
