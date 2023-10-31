@@ -101,6 +101,7 @@ window.onload = () => {
 
     function OA() {
       data.OAChecker = !data.OAChecker;
+      let interval = 3 * 1000; // 3 segundos
       let clicker = setInterval(() => {
         if (!data.OAChecker) {
           clearInterval(clicker);
@@ -108,7 +109,7 @@ window.onload = () => {
         } else {
           hacerClicEnBotonOA();
         }
-      }, 5000);
+      }, interval);
 
       chrome.storage.local.set({ 'yt-shortcuts': data }, function() {
         console.log('Datos guardados en chrome.storage.local');
@@ -119,6 +120,8 @@ window.onload = () => {
       const menuOptions = document.querySelectorAll(
         "ytd-menu-renderer.style-scope.ytd-watch-metadata > div#top-level-buttons-computed"
       );
+
+      if(menuOptions.length === 0) return;
 
       const [buttonLike, buttonDisLike] = menuOptions[0].querySelectorAll(
         "ytd-toggle-button-renderer > yt-button-shape > button"
