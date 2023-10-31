@@ -40,6 +40,8 @@ function setValue(key, value, callback) {
 const body = document.getElementsByTagName('body')[0];
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 const langToggle = document.getElementById('lang-toggle');
+const secondsInput = document.getElementById('seconds');
+
 if (darkModeToggle !== null) {
     darkModeToggle.addEventListener('change', function () {
         setValue('DarkMode',darkModeToggle.checked, function (value) {
@@ -54,6 +56,12 @@ if (darkModeToggle !== null) {
         });        
     });
 
+    secondsInput.addEventListener('change', function () {
+        setValue('seconds',secondsInput.value, function (value) {
+            secondsInput.value = value;
+        });
+    });
+
     body.onload = function () {
         getValue('DarkMode',function (value) {
             darkModeToggle.checked = value;
@@ -62,6 +70,10 @@ if (darkModeToggle !== null) {
         getValue('Lang',function (value) {
             langToggle.checked = value;
             handleLangToggle();
+        });
+
+        getValue('seconds',function (value) {
+            secondsInput.value = value;
         });
     };
 
@@ -75,6 +87,9 @@ if (darkModeToggle !== null) {
             if (newValues.Lang !== undefined) {
                 langToggle.checked = newValues.Lang;
                 handleLangToggle();
+            }
+            if (newValues.seconds !== undefined) {
+                secondsInput.value = newValues.seconds;
             }
         }
     });
