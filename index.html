@@ -8,7 +8,6 @@
     <style>
       :root {
         zoom: 150%;
-        color-scheme: dark;
       }
 
       :root:has(#dark-mode-toggle:checked) {
@@ -30,7 +29,7 @@
       li {
         list-style: none;
         text-align: center;
-        /* margin-left: -35px; */
+        margin: 2.5px 0;
       }
 
       a {
@@ -58,7 +57,7 @@
       }
 
       h4 {
-        margin: 10px;
+        margin: 10px 0;
         text-align: center;
       }
 
@@ -75,6 +74,16 @@
 
       #content {
         margin: 30px 0;
+      }
+
+      #seconds-sections {
+        width: 50%;
+        margin: auto;
+        margin-top: 20px;
+        /* display: flex; */
+        justify-content: space-between;
+        align-items: center;
+        display: none;
       }
 
       .inputContainer {
@@ -156,6 +165,11 @@
             Press <strong>"N"</strong> to Auto-Skip Ads ⛔
           </li>
         </ul>
+        <div id="seconds-sections">
+          <label for="">With</label>
+          <input type="number" min="1" max="10" id="seconds" value="7">
+          <label for="seconds">Seconds</label>
+        </div>
       </div>
     </div>
   </body>
