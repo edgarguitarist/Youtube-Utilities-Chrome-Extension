@@ -209,7 +209,7 @@ window.onload = () => {
       });
     });
 
-  }, 2000); // tiempo de espera hasta que se cargue el DOM
+  }, 3000); // tiempo de espera hasta que se cargue el DOM
 
 };
 
