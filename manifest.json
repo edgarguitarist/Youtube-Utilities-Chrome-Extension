@@ -10,19 +10,18 @@
   },
   "background": {
     "service_worker": "background.js"
-  },
-  
-  "permissions": ["activeTab", "scripting", "storage"],
+  },  
+  "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
   "action": {
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://*.youtube.com/watch*"
-      ],
-      "exclude_matches": ["*://*.music.youtube.com/*"],
+      "matches": ["*://*.youtube.com/*"],
       "js": ["features.js", "load.js"]
     }
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*"
   ]
 }
