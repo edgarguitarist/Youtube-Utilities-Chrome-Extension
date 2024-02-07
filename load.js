@@ -44,35 +44,35 @@ const secondsInput = document.getElementById('seconds');
 
 if (darkModeToggle !== null) {
     darkModeToggle.addEventListener('change', function () {
-        setValue('DarkMode',darkModeToggle.checked, function (value) {
+        setValue('DarkMode', darkModeToggle.checked, function (value) {
             darkModeToggle.checked = value;
-        });        
+        });
     });
 
     langToggle.addEventListener('change', function () {
-        setValue('Lang',langToggle.checked, function (value) {
+        setValue('Lang', langToggle.checked, function (value) {
             langToggle.checked = value;
             handleLangToggle();
-        });        
+        });
     });
 
     secondsInput.addEventListener('change', function () {
-        setValue('seconds',secondsInput.value, function (value) {
+        setValue('seconds', secondsInput.value, function (value) {
             secondsInput.value = value;
         });
     });
 
     body.onload = function () {
-        getValue('DarkMode',function (value) {
+        getValue('DarkMode', function (value) {
             darkModeToggle.checked = value;
         });
 
-        getValue('Lang',function (value) {
+        getValue('Lang', function (value) {
             langToggle.checked = value;
             handleLangToggle();
         });
 
-        getValue('seconds',function (value) {
+        getValue('seconds', function (value) {
             secondsInput.value = value;
         });
     };
@@ -103,10 +103,11 @@ const textos = {
         darkModeToggleLabel: 'Modo Oscuro',
         actionsHeader: 'Acciones Disponibles 🔮✨',
         likeAction: 'Presiona <strong>"A"</strong> para dar Me gusta a un video 👍🏽',
-        dislikeAction: 'Presiona <strong>"D"</strong> para dar No me gusta a un video 👎🏽',        
+        dislikeAction: 'Presiona <strong>"D"</strong> para dar No me gusta a un video 👎🏽',
         playerButtonsAction: 'Presiona <strong>"X"</strong> para añadir botones de Me gusta y No me gusta al reproductor de video 📺',
         skipAdsAction: 'Presiona <strong>"N"</strong> para Omitir Anuncios Automáticamente ⛔',
-        developer: 'Desarrollado con ❤️ por <a href="https://github.com/edgarguitarist">edgarguitarist</a>'
+        developer_text: 'Desarrollado con ❤️ por',
+        donate_text: "Dona para apoyar este proyecto 🙏🏽"
     },
     en: {
         title: 'YouTube Utilities',
@@ -117,11 +118,12 @@ const textos = {
         dislikeAction: 'Press <strong>"D"</strong> to Dislike a video 👎🏽',
         playerButtonsAction: 'Press <strong>"X"</strong> to Add Like & Dislike buttons to Video Player 📺',
         skipAdsAction: 'Press <strong>"N"</strong> to Auto-Skip Ads ⛔',
-        developer: 'Developed with ❤️ by <a href="https://github.com/edgarguitarist">edgarguitarist</a>'
+        developer_text: 'Developed with ❤️ by',
+        donate_text: "Donate to support the project 🙏🏽"
     }
 };
 
-function handleLangToggle() {    
+function handleLangToggle() {
     const lang = langToggle.checked ? 'es' : 'en';
     const langTexts = textos[lang];
     document.title = langTexts.title;
@@ -133,6 +135,7 @@ function handleLangToggle() {
     document.getElementById('dislike-action').innerHTML = langTexts.dislikeAction;
     document.getElementById('player-buttons-action').innerHTML = langTexts.playerButtonsAction;
     document.getElementById('skip-ads-action').innerHTML = langTexts.skipAdsAction;
-    document.getElementById('developer').innerHTML = langTexts.developer;
+    document.getElementById('developer_text').innerHTML = langTexts.developer_text;
+    document.getElementById('donate_text').innerHTML = langTexts.donate_text;
 
 }

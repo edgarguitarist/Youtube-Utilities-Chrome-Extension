@@ -24,7 +24,6 @@
       a {
         color: slateblue;
         text-decoration: none;
-        margin-left: 5px;
       }
       a:hover {
         text-decoration: underline;
@@ -108,6 +107,19 @@
       #lang-toggle + #label-lang-toggle::before {
         content: "🇪🇨";
       }
+      
+      a#donate {
+        display: flex;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 5px;
+        }
+      }
+
     </style>
     <script type="module" src="load.js"></script>
   </head>
@@ -158,6 +170,12 @@
     </div>
   </body>
   <footer>
+    <h4>
+      <a id="donate" href="https://paypal.me/edgarguitarist" target="_blank">
+        <img src="images/paypal-seeklogo.svg" alt="paypal logo">
+        <span id="donate-text">Donate to support the project 🙏🏽</span>
+      </a>
+    </h4>
     <h4 id="developer">
       Developed with ❤️ by
       <a href="https://github.com/edgarguitarist">edgarguitarist</a>
