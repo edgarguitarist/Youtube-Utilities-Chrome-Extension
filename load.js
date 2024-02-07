@@ -98,7 +98,7 @@ if (darkModeToggle !== null) {
 
 const textos = {
     es: {
-        title: 'YouTube Utilidades',
+        title: 'YT Utilidades',
         langToggleLabel: 'Ingles',
         darkModeToggleLabel: 'Modo Oscuro',
         actionsHeader: 'Acciones Disponibles 🔮✨',
@@ -110,7 +110,7 @@ const textos = {
         donate_text: "Dona para apoyar este proyecto 🙏🏽"
     },
     en: {
-        title: 'YouTube Utilities',
+        title: 'YT Utilities',
         langToggleLabel: 'Spanish',
         darkModeToggleLabel: 'Dark Mode',
         actionsHeader: 'Available Actions 🔮✨',
