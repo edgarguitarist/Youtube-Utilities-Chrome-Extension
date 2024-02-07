@@ -1,3 +1,57 @@
+const conf = {
+  like: {
+    id: "img_like_yt",
+    icon_pressed: "mdi:thumb-up.svg",
+    icon: "mdi:thumb-up-outline.svg",
+    other: "dislike"
+  },
+  dislike: {
+    id: "img_dislike_yt",
+    icon_pressed: "mdi:thumb-down.svg",
+    icon: "mdi:thumb-down-outline.svg",
+    other: "like"
+  },
+  n: {
+    id: "img_skip_ad_yt",
+    icon: "icon-park-outline/ad.svg",
+    icon_pressed: "icon-park-solid/ad.svg",
+    other: ""
+  }
+};
+
+const toggleIcon = (pressed, name, img) => {
+
+  if (conf[name].other) {
+    const b = document.querySelector(`#${conf[conf[name].other].id}`)
+    let icon = conf[conf[name].other].icon;
+    b.src = `https://api.iconify.design/${icon}`;
+  }
+
+  // if (name === "n") {
+  //   let nbutton = document.querySelector('#newButtons-n')
+  //   pressed = nbutton.getAttribute("aria-pressed");
+  //   pressed = data.OAChecker ? "false" : "true";
+  //   if(data.OAChecker){
+  //     nbutton.setAttribute("aria-pressed", pressed === "true" ? "false" : "true");
+  //     nbutton.setAttribute("aria-pressed", "true");
+  //   }
+  // }
+
+  if (name === "n") {
+    pressed = data.OAChecker ? "false" : "true";
+  }
+
+  const icon2 = pressed === "true" ? conf[name].icon_pressed : conf[name].icon;
+  if (img) {
+    img.src = `https://api.iconify.design/${icon2}`;
+  } else {
+    let imgtry = document.querySelector(`#${conf[name].id}`)
+    if (imgtry) {
+      imgtry.src = `https://api.iconify.design/${icon2}`;
+    }
+  }
+}
+
 window.onload = () => {
   setTimeout(function () {
     chrome.storage.local.get(['yt-shortcuts'], function (result) {
@@ -54,48 +108,31 @@ window.onload = () => {
         }
       }
 
+
+
       function createNewButtons(name) {
         const { buttonLike, buttonDisLike } = getButtons();
         if (!buttonLike || !buttonDisLike) return;
         let pressed
-        if (name === "like") {
-          buttonLike.addEventListener("click", () => {
-            pressed = buttonLike.getAttribute("aria-pressed");
-            toggleIcon(pressed);
-          });
-        } else {
-          buttonDisLike.addEventListener("click", () => {
-            pressed = buttonDisLike.getAttribute("aria-pressed");
-            toggleIcon(pressed);
-          });
-        }
 
-        const conf = {
-          like: {
-            id: "img_like_yt",
-            icon_pressed: "mdi:thumb-up.svg",
-            icon: "mdi:thumb-up-outline.svg",
-            other: "dislike"
-          },
-          dislike: {
-            id: "img_dislike_yt",
-            icon_pressed: "mdi:thumb-down.svg",
-            icon: "mdi:thumb-down-outline.svg",
-            other: "like"
-          },
-          n: {
-            id: "img_skip_ad_yt",
-            icon: "icon-park-outline/ad.svg",
-            icon_pressed: "icon-park-solid/ad.svg",
-            other: ""
-          }
-        }
+
 
         let icon = conf[name].icon;
         const img = document.createElement("img");
         img.src = `https://api.iconify.design/${icon}`;
         img.id = conf[name].id;
         img.style = "filter: invert(1); width: inherit;";
+        if (name === "like") {
+          buttonLike.addEventListener("click", () => {
+            pressed = buttonLike.getAttribute("aria-pressed");
+            toggleIcon(pressed, name, img);
+          });
+        } else {
+          buttonDisLike.addEventListener("click", () => {
+            pressed = buttonDisLike.getAttribute("aria-pressed");
+            toggleIcon(pressed, name, img);
+          });
+        }
 
         const right_controls = document.querySelector("div.ytp-right-controls");
 
@@ -114,22 +151,9 @@ window.onload = () => {
         newButton.setAttribute("data-title-no-tooltip", name);
         newButton.setAttribute("aria-keyshortcuts", name[0]);
 
-        const toggleIcon = (pressed) => {
-          if (conf[name].other) {
-            const b = document.querySelector(`#${conf[conf[name].other].id}`)
-            let icon = conf[conf[name].other].icon;
-            b.src = `https://api.iconify.design/${icon}`;
-          }
-          if (name === "n") {
-            pressed = data.OAChecker ? "false" : "true";
-          }
-          const icon2 = pressed === "true" ? conf[name].icon_pressed : conf[name].icon;
-          img.src = `https://api.iconify.design/${icon2}`;
-        }
-
         newButton.onclick = () => {
           actions(name);
-          toggleIcon(pressed);
+          toggleIcon(pressed, name, img);
         };
 
         newButton.removeChild(newButton.childNodes[0]);
@@ -148,7 +172,7 @@ window.onload = () => {
           createNewButtons("like");
           createNewButtons("n");
         } else {
-          document.querySelectorAll("#newButtons").forEach((e) => e.remove());
+          document.querySelectorAll('[id*="newButtons"]').forEach((e) => e.remove());
         }
       }
 
@@ -168,6 +192,7 @@ window.onload = () => {
           if (!data.OAChecker) {
             clearInterval(clicker);
             console.log('OA desactivado');
+            
           } else {
             hacerClicEnBotonOA();
           }
@@ -191,6 +216,7 @@ window.onload = () => {
           dislike: buttonDisLike,
         };
 
+
         if (methods[method] && checkNoFocus()) {
           if (method !== "x" && method !== "n") {
             methods[method].click();
@@ -200,11 +226,13 @@ window.onload = () => {
           }
           if (method === "n") {
             OA();
+            toggleIcon("true", "n");
           }
         }
       }
 
       document.addEventListener("keydown", (e) => {
+        console.log(e.key);
         actions(e.key);
       });
     });
