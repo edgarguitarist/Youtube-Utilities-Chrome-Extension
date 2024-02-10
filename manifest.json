@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Utilities",
-  "description": "Agrega utilidades y funcionalidades que YouTube debería tener",
-  "version": "1.1.1",
+  "name": "YT Utilities",
+  "author": "edgarguitarist",
+  "description": "Agrega utilidades y funcionalidades que YT debería tener, ademas de un auto-omitidor de anuncios",
+  "version": "1.1.2",
   "icons": {
     "128": "images/128.png",
     "256": "images/256.png",
@@ -11,7 +12,7 @@
   "background": {
     "service_worker": "background.js"
   },  
-  "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
+  "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
   },
