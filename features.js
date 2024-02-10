@@ -19,46 +19,15 @@ const conf = {
   }
 };
 
-const toggleIcon = (pressed, name, img) => {
 
-  if (conf[name].other) {
-    const b = document.querySelector(`#${conf[conf[name].other].id}`)
-    let icon = conf[conf[name].other].icon;
-    b.src = `https://api.iconify.design/${icon}`;
-  }
-
-  // if (name === "n") {
-  //   let nbutton = document.querySelector('#newButtons-n')
-  //   pressed = nbutton.getAttribute("aria-pressed");
-  //   pressed = data.OAChecker ? "false" : "true";
-  //   if(data.OAChecker){
-  //     nbutton.setAttribute("aria-pressed", pressed === "true" ? "false" : "true");
-  //     nbutton.setAttribute("aria-pressed", "true");
-  //   }
-  // }
-
-  if (name === "n") {
-    pressed = data.OAChecker ? "false" : "true";
-  }
-
-  const icon2 = pressed === "true" ? conf[name].icon_pressed : conf[name].icon;
-  if (img) {
-    img.src = `https://api.iconify.design/${icon2}`;
-  } else {
-    let imgtry = document.querySelector(`#${conf[name].id}`)
-    if (imgtry) {
-      imgtry.src = `https://api.iconify.design/${icon2}`;
-    }
-  }
-}
 
 window.onload = () => {
   setTimeout(function () {
     chrome.storage.local.get(['yt-shortcuts'], function (result) {
       const data = result['yt-shortcuts'] || {
-        newButton: false,
-        OAChecker: false,
-        DarkMode: false,
+        newButton: true,
+        OAChecker: true,
+        DarkMode: true,
         Lang: 'en'
       };
 
@@ -95,6 +64,29 @@ window.onload = () => {
           document.activeElement.id !== "search" &&
           document.activeElement.id !== "contenteditable-root"
         );
+      }
+
+      const toggleIcon = (pressed, name, img) => {
+
+        if (conf[name].other) {
+          const b = document.querySelector(`#${conf[conf[name].other].id}`)
+          let icon = conf[conf[name].other].icon;
+          b.src = `https://api.iconify.design/${icon}`;
+        }
+
+        if (name === "n") {
+          pressed = data.OAChecker ? "false" : "true";
+        }
+
+        const icon2 = pressed === "true" ? conf[name].icon_pressed : conf[name].icon;
+        if (img) {
+          img.src = `https://api.iconify.design/${icon2}`;
+        } else {
+          let imgtry = document.querySelector(`#${conf[name].id}`)
+          if (imgtry) {
+            imgtry.src = `https://api.iconify.design/${icon2}`;
+          }
+        }
       }
 
       function getButtons() {
@@ -192,7 +184,7 @@ window.onload = () => {
           if (!data.OAChecker) {
             clearInterval(clicker);
             console.log('OA desactivado');
-            
+
           } else {
             hacerClicEnBotonOA();
           }
