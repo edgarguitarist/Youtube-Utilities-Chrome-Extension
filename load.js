@@ -1,9 +1,9 @@
 function getLocalStorage(callback) {
     chrome.storage.local.get(['yt-shortcuts'], function (result) {
         const data = result['yt-shortcuts'] || {
-            newButton: false,
-            OAChecker: false,
-            DarkMode: false,
+            newButton: true,
+            OAChecker: true,
+            DarkMode: true,
             Lang: 'en'
         };
         callback(data);
