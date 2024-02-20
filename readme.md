@@ -2,7 +2,7 @@
 
 ## Instalación
 
-Ya disponible en la [Chrome Store](https://chromewebstore.google.com/detail/yt-utilities/nnnmbbmkfoehcnaknjjkknnihjogljjb?hl=es-419&authuser=0) y proximamente en la Edge Store
+Ya disponible en la [Chrome Store](https://chromewebstore.google.com/detail/yt-utilities/nnnmbbmkfoehcnaknjjkknnihjogljjb?hl=es-419&authuser=0) y proximamente en la [Microsoft Edge Store](https://microsoftedge.microsoft.com/addons/detail/yt-utilities/pjkejeopjmhcciadfjfmcaephdlbjpaf)
 
 ## Funcionalidades
 
