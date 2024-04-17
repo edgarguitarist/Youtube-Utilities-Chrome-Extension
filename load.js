@@ -1,8 +1,6 @@
 function getLocalStorage(callback) {
     chrome.storage.local.get(['yt-shortcuts'], function (result) {
-        const data = result['yt-shortcuts'] || {
-            newButton: true,
-            OAChecker: true,
+        const data = result['yt-shortcuts'] || {           
             DarkMode: true,
             Lang: 'en'
         };
@@ -40,7 +38,6 @@ function setValue(key, value, callback) {
 const body = document.getElementsByTagName('body')[0];
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 const langToggle = document.getElementById('lang-toggle');
-const secondsInput = document.getElementById('seconds');
 
 if (darkModeToggle !== null) {
     darkModeToggle.addEventListener('change', function () {
@@ -56,12 +53,6 @@ if (darkModeToggle !== null) {
         });
     });
 
-    secondsInput.addEventListener('change', function () {
-        setValue('seconds', secondsInput.value, function (value) {
-            secondsInput.value = value;
-        });
-    });
-
     body.onload = function () {
         getValue('DarkMode', function (value) {
             darkModeToggle.checked = value;
@@ -72,9 +63,7 @@ if (darkModeToggle !== null) {
             handleLangToggle();
         });
 
-        getValue('seconds', function (value) {
-            secondsInput.value = value;
-        });
+       
     };
 
     // Escuchar cambios en chrome.storage.local
@@ -104,8 +93,8 @@ const textos = {
         actionsHeader: 'Acciones Disponibles 🔮✨',
         likeAction: 'Presiona <strong>"A"</strong> para dar Me gusta a un video 👍🏽',
         dislikeAction: 'Presiona <strong>"D"</strong> para dar No me gusta a un video 👎🏽',
-        playerButtonsAction: 'Presiona <strong>"X"</strong> para añadir botones de Me gusta y No me gusta al reproductor de video 📺',
-        skipAdsAction: 'Presiona <strong>"N"</strong> para Omitir Anuncios Automáticamente ⛔',
+        playerButtonsAction: 'Añadido Botones Like 👍🏽 & Dislike 👎🏽 al reproductor 📺',
+        skipAdsAction: 'Auto-Skip de Anuncios ⛔, por ahora cada 3 segundos',
         developer_text: 'Desarrollado con ❤️ por',
         donate_text: "Dona para apoyar este proyecto 🙏🏽"
     },
@@ -116,8 +105,8 @@ const textos = {
         actionsHeader: 'Available Actions 🔮✨',
         likeAction: 'Press <strong>"A"</strong> to Like a video 👍🏽',
         dislikeAction: 'Press <strong>"D"</strong> to Dislike a video 👎🏽',
-        playerButtonsAction: 'Press <strong>"X"</strong> to Add Like & Dislike buttons to Video Player 📺',
-        skipAdsAction: 'Press <strong>"N"</strong> to Auto-Skip Ads ⛔',
+        playerButtonsAction: 'Added Like 👍🏽 & Dislike 👎🏽 buttons to Video Player 📺',
+        skipAdsAction: 'Auto-Skip Ads ⛔, now every 3 seconds.',
         developer_text: 'Developed with ❤️ by',
         donate_text: "Donate to support the project 🙏🏽"
     }
