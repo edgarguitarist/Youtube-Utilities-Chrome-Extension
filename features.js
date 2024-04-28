@@ -15,7 +15,8 @@ const DATA_BUTTONS = {
   }
 };
 
-const CURRENT_SECONDS = 3;
+const AWAIT_DOM_SECONDS = 3.5;
+const AWAIT_SKIP_SECONDS = 2;
 
 
 window.onload = () => {
@@ -72,7 +73,6 @@ window.onload = () => {
       button.setAttribute("aria-keyshortcuts", DATA_BUTTONS[name].key);
 
       button.addEventListener("click", () => {
-        console.log(name, original);
         let icon = getAriaPressed(original) ? DATA_BUTTONS[name].icon : DATA_BUTTONS[name].icon_pressed;
         ICON.src = `https://api.iconify.design/${icon}`;
         oppositeButton = document.getElementById(`newButtons-${DATA_BUTTONS[name].other}`);
@@ -105,17 +105,17 @@ window.onload = () => {
     }, 1000);
 
     function OmitirButton() {
-      const boton = document.querySelector('.ytp-ad-skip-button-modern.ytp-button');
-      if (!boton) return;
+      const skipButton = document.querySelector('.ytp-ad-skip-button-modern.ytp-button');
+      if (!skipButton) return;
       setTimeout(() => {
-        boton.click();
+        skipButton.click();
         console.log('Se ha omitido el anuncio', new Date());
-      }, 2000);
+      }, AWAIT_SKIP_SECONDS*1000);
     }
 
     function observarCambiosEnDOM() {
-      let Elements = document.getElementsByTagName('ytd-watch-flexy');
-      let targetNode = Elements[0];
+      let elements = document.getElementsByTagName('ytd-watch-flexy');
+      let targetNode = elements[0];
       let config = { childList: true, subtree: true };
       let observer = new MutationObserver(mutations => {
         OmitirButton()
@@ -142,7 +142,7 @@ window.onload = () => {
     document.addEventListener("keydown", (e) => {
       actions(e.key);
     });
-  }, 3500); // tiempo de espera hasta que se cargue el DOM
+  }, AWAIT_DOM_SECONDS*1000); // tiempo de espera hasta que se cargue el DOM
 };
 
 
