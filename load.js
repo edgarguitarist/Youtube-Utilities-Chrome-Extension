@@ -1,6 +1,6 @@
 function getLocalStorage(callback) {
     chrome.storage.local.get(['yt-shortcuts'], function (result) {
-        const data = result['yt-shortcuts'] || {           
+        const data = result['yt-shortcuts'] || {
             DarkMode: true,
             Lang: 'en'
         };
@@ -33,8 +33,6 @@ function setValue(key, value, callback) {
     });
 }
 
-
-
 const body = document.getElementsByTagName('body')[0];
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 const langToggle = document.getElementById('lang-toggle');
@@ -63,7 +61,7 @@ if (darkModeToggle !== null) {
             handleLangToggle();
         });
 
-       
+
     };
 
     // Escuchar cambios en chrome.storage.local
